@@ -1,0 +1,135 @@
+{
+  "categories": [
+    {
+      "name": "AI 工具",
+      "icon": "🤖",
+      "bookmarks": [
+        {
+          "name": "ChatGPT",
+          "url": "https://chat.openai.com",
+          "description": "OpenAI 的 AI 聊天助手"
+        },
+        {
+          "name": "Claude",
+          "url": "https://claude.ai",
+          "description": "Anthropic 的 AI 助手"
+        },
+        {
+          "name": "Midjourney",
+          "url": "https://www.midjourney.com",
+          "description": "AI 图像生成工具"
+        }
+      ]
+    },
+    {
+      "name": "开发工具",
+      "icon": "🛠️",
+      "bookmarks": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com",
+          "description": "代码托管与协作平台"
+        },
+        {
+          "name": "Stack Overflow",
+          "url": "https://stackoverflow.com",
+          "description": "开发者问答社区"
+        },
+        {
+          "name": "MDN Web Docs",
+          "url": "https://developer.mozilla.org",
+          "description": "Web 开发权威文档"
+        },
+        {
+          "name": "CodePen",
+          "url": "https://codepen.io",
+          "description": "前端代码在线编辑器"
+        }
+      ]
+    },
+    {
+      "name": "设计资源",
+      "icon": "🎨",
+      "bookmarks": [
+        {
+          "name": "Dribbble",
+          "url": "https://dribbble.com",
+          "description": "设计师灵感社区"
+        },
+        {
+          "name": "Figma",
+          "url": "https://www.figma.com",
+          "description": "在线协作设计工具"
+        },
+        {
+          "name": "Unsplash",
+          "url": "https://unsplash.com",
+          "description": "免费高清图片库"
+        }
+      ]
+    },
+    {
+      "name": "学习平台",
+      "icon": "📚",
+      "bookmarks": [
+        {
+          "name": "Coursera",
+          "url": "https://www.coursera.org",
+          "description": "在线课程平台"
+        },
+        {
+          "name": "Udemy",
+          "url": "https://www.udemy.com",
+          "description": "实用技能学习平台"
+        },
+        {
+          "name": "YouTube",
+          "url": "https://www.youtube.com",
+          "description": "视频学习资源"
+        }
+      ]
+    },
+    {
+      "name": "效率工具",
+      "icon": "⚡",
+      "bookmarks": [
+        {
+          "name": "Notion",
+          "url": "https://www.notion.so",
+          "description": "一体化工作空间"
+        },
+        {
+          "name": "Obsidian",
+          "url": "https://obsidian.md",
+          "description": "知识管理工具"
+        },
+        {
+          "name": "Trello",
+          "url": "https://trello.com",
+          "description": "项目管理看板"
+        }
+      ]
+    },
+    {
+      "name": "网盘搜索",
+      "icon": "🔍",
+      "bookmarks": [
+        {
+          "name": "AiPan",
+          "url": "https://www.aipan.me/",
+          "description": "AI 驱动的网盘资源搜索引擎"
+        },
+        {
+          "name": "PanHub",
+          "url": "https://panhub.shenzjd.com/",
+          "description": "多网盘资源搜索工具"
+        },
+        {
+          "name": "PanSou",
+          "url": "https://pansou.jkai.de/",
+          "description": "快速网盘资源检索"
+        }
+      ]
+    }
+  ]
+}

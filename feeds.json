@@ -1,0 +1,59 @@
+{
+  "feeds": [
+    {
+      "name": "机器之心",
+      "rss": "https://www.jiqizhixin.com/rss",
+      "description": "专业的人工智能媒体",
+      "category": "AI"
+    },
+    {
+      "name": "TechCrunch",
+      "rss": "https://techcrunch.com/feed/",
+      "description": "科技创业与投资新闻",
+      "category": "Tech"
+    },
+    {
+      "name": "Hacker News",
+      "rss": "https://news.ycombinator.com/rss",
+      "description": "计算机科学与创业",
+      "category": "Tech"
+    },
+    {
+      "name": "36氪",
+      "rss": "https://36kr.com/feed",
+      "description": "领先的科技创投媒体",
+      "category": "Business"
+    },
+    {
+      "name": "The Verge",
+      "rss": "https://www.theverge.com/rss/index.xml",
+      "description": "科技、文化与互联网",
+      "category": "Tech"
+    },
+    {
+      "name": "MIT Technology Review",
+      "rss": "https://www.technologyreview.com/feed/",
+      "description": "麻省理工技术评论",
+      "category": "AI"
+    },
+    {
+      "name": "Wired",
+      "rss": "https://www.wired.com/feed/rss",
+      "description": "科技如何改变文化",
+      "category": "Tech"
+    },
+    {
+      "name": "InfoQ",
+      "rss": "https://www.infoq.cn/feed",
+      "description": "促进软件开发领域知识创新",
+      "category": "Dev"
+    }
+  ],
+  "settings": {
+    "articlesPerFeed": 5,
+    "refreshInterval": 30,
+    "cacheDuration": 60,
+    "showCategories": true,
+    "enableDarkMode": true
+  }
+}

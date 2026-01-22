@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsPulse | 智能新闻聚合</title>
+
+    <!-- Google Fonts: Playfair Display (优雅衬线) + JetBrains Mono (技术感) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Playfair+Display:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           CSS VARIABLES - 设计系统核心
+           ============================================ */
+        :root {
+            /* 配色方案：深色编辑风格 */
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #242424;
+            --bg-card-hover: #2a2a2a;
+
+            /* 强调色：琥珀金系列 */
+            --accent-primary: #f59e0b;
+            --accent-secondary: #d97706;
+            --accent-glow: rgba(245, 158, 11, 0.15);
+
+            /* 文字颜色 */
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+
+            /* 边框与分割线 */
+            --border-color: #3f3f46;
+            --border-glow: rgba(245, 158, 11, 0.3);
+
+            /* 字体 */
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'JetBrains Mono', 'Courier New', monospace;
+
+            /* 间距系统 */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+
+            /* 动画 */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+
+            /* 阴影 */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 20px var(--accent-glow);
+        }
+
+        /* ============================================
+           RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 背景纹理效果 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(245, 158, 11, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(245, 158, 11, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* 噪点纹理 */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-lg);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        .header {
+            text-align: center;
+            padding: var(--space-xl) 0;
+            margin-bottom: var(--space-xl);
+            position: relative;
+        }
+
+        /* 装饰线条 */
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, var(--accent-primary));
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-sm);
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .tagline {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-lg);
+            margin-top: var(--space-md);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            animation: fadeIn 0.8s ease-out 0.4s both;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .stat-item::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        /* ============================================
+           CONTROLS
+           ============================================ */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+            padding: var(--space-md);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            animation: fadeIn 0.8s ease-out 0.5s both;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 4px;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .filter-btn.active {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+            color: var(--bg-primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .refresh-btn {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 4px;
+        }
+
+        .refresh-btn:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .refresh-btn.rotating svg {
+            animation: spin 1s linear infinite;
+        }
+
+        /* ============================================
+           BOOKMARKS SECTION
+           ============================================ */
+        .bookmarks-section {
+            margin-bottom: var(--space-xl);
+            animation: fadeIn 0.8s ease-out 0.3s both;
+        }
+
+        .bookmarks-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .bookmarks-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .bookmarks-toggle {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            padding: 0.4rem 0.8rem;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 4px;
+        }
+
+        .bookmarks-toggle:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .bookmarks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .bookmark-category {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all var(--transition-normal);
+        }
+
+        .bookmark-category:hover {
+            border-color: var(--accent-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .bookmark-category-header {
+            padding: var(--space-sm) var(--space-md);
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .bookmark-category-icon {
+            font-size: 1.2rem;
+        }
+
+        .bookmark-category-name {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .bookmark-list {
+            padding: var(--space-sm);
+            list-style: none;
+        }
+
+        .bookmark-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-xs);
+            padding: var(--space-sm);
+            border-radius: 6px;
+            transition: background var(--transition-fast);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .bookmark-item:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .bookmark-icon {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            margin-top: 0.2rem;
+        }
+
+        .bookmark-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .bookmark-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.2rem;
+            display: block;
+        }
+
+        .bookmark-item:hover .bookmark-name {
+            color: var(--accent-primary);
+        }
+
+        .bookmark-description {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .bookmarks-collapsed .bookmarks-grid {
+            display: none;
+        }
+
+        .bookmarks-collapsed .bookmarks-toggle::after {
+            content: ' (展开)';
+        }
+
+        .bookmarks-toggle::after {
+            content: ' (收起)';
+        }
+
+        .bookmarks-collapsed .bookmarks-toggle::after {
+            content: ' (展开)';
+        }
+
+        /* ============================================
+           NEWS GRID
+           ============================================ */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        /* ============================================
+           FEED CARD
+           ============================================ */
+        .feed-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all var(--transition-normal);
+            position: relative;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        /* 悬停3D效果 */
+        .feed-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .feed-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-primary);
+            box-shadow:
+                var(--shadow-lg),
+                var(--shadow-glow),
+                0 0 0 1px var(--border-glow);
+        }
+
+        .feed-header {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-secondary);
+        }
+
+        .feed-name {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .feed-category {
+            font-size: 0.65rem;
+            padding: 0.25rem 0.5rem;
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .feed-description {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            padding: var(--space-sm) var(--space-md);
+            font-style: italic;
+        }
+
+        .articles-list {
+            padding: 0;
+            list-style: none;
+        }
+
+        .article-item {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--border-color);
+            transition: background var(--transition-fast);
+            position: relative;
+        }
+
+        .article-item:last-child {
+            border-bottom: none;
+        }
+
+        .article-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--accent-primary);
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+
+        .article-item:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .article-item:hover::before {
+            opacity: 1;
+        }
+
+        .article-title {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+            line-height: 1.4;
+            margin-bottom: var(--space-xs);
+            transition: color var(--transition-fast);
+        }
+
+        .article-title:hover {
+            color: var(--accent-primary);
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .article-date {
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .article-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: gap var(--transition-fast);
+        }
+
+        .article-link:hover {
+            gap: 0.5rem;
+        }
+
+        /* ============================================
+           LOADING & EMPTY STATES
+           ============================================ */
+        .loading {
+            text-align: center;
+            padding: var(--space-xl);
+            color: var(--text-secondary);
+        }
+
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto var(--space-md);
+        }
+
+        .error {
+            text-align: center;
+            padding: var(--space-xl);
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 8px;
+            color: #fca5a5;
+        }
+
+        .error-icon {
+            font-size: 3rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .error-message {
+            font-size: 0.875rem;
+            margin-bottom: var(--space-sm);
+        }
+
+        .error-details {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: var(--font-body);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            text-align: center;
+            padding: var(--space-xl) 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: var(--space-xl);
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: var(--space-md);
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-link:hover {
+            color: var(--accent-primary);
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--space-md);
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                flex-direction: column;
+                gap: var(--space-md);
+                align-items: stretch;
+            }
+
+            .filter-group {
+                justify-content: center;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* ============================================
+           UTILITY CLASSES
+           ============================================ */
+        .hidden {
+            display: none !important;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 页头 -->
+        <header class="header">
+            <h1 class="logo">NewsPulse</h1>
+            <p class="tagline">智能新闻聚合 · 实时追踪</p>
+            <div class="stats">
+                <div class="stat-item" id="feedCount">加载中...</div>
+                <div class="stat-item" id="articleCount">加载中...</div>
+                <div class="stat-item" id="lastUpdate">加载中...</div>
+            </div>
+        </header>
+
+        <!-- 收藏网站区域 -->
+        <section class="bookmarks-section" id="bookmarksSection">
+            <div class="bookmarks-header">
+                <h2 class="bookmarks-title">
+                    <span>⭐</span>
+                    常用网站
+                </h2>
+                <button class="bookmarks-toggle" id="bookmarksToggle">收起</button>
+            </div>
+            <div class="bookmarks-grid" id="bookmarksGrid">
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>正在加载收藏...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 控制栏 -->
+        <div class="controls">
+            <div class="filter-group" id="categoryFilters">
+                <button class="filter-btn active" data-category="all">全部</button>
+                <button class="filter-btn" data-category="AI">AI</button>
+                <button class="filter-btn" data-category="Tech">科技</button>
+                <button class="filter-btn" data-category="Business">商业</button>
+                <button class="filter-btn" data-category="Dev">开发</button>
+            </div>
+            <button class="refresh-btn" id="refreshBtn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="23 4 23 10 17 10"></polyline>
+                    <polyline points="1 20 1 14 7 14"></polyline>
+                    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                </svg>
+                刷新
+            </button>
+        </div>
+
+        <!-- 新闻网格 -->
+        <main class="news-grid" id="newsGrid">
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>正在加载新闻源...</p>
+            </div>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>© 2026 NewsPulse. 纯静态新闻聚合器</p>
+                <div class="footer-links">
+                    <a href="https://github.com" class="footer-link" target="_blank">GitHub</a>
+                    <a href="#" class="footer-link" onclick="showConfigHelp(); return false;">配置帮助</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // ============================================
+        // 配置与全局变量
+        // ============================================
+        let allFeeds = [];
+        let allArticles = {};
+        let currentCategory = 'all';
+
+        // RSS 转 JSON 代理 API（解决跨域问题）
+        const RSS2JSON_API = 'https://api.rss2json.com/v1/api.json?rss_url=';
+
+        // ============================================
+        // 工具函数
+        // ============================================
+        /**
+         * 格式化日期为相对时间（如"3小时前"）
+         */
+        function formatRelativeTime(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+
+            if (diffMins < 60) {
+                return `${diffMins}分钟前`;
+            } else if (diffHours < 24) {
+                return `${diffHours}小时前`;
+            } else if (diffDays < 7) {
+                return `${diffDays}天前`;
+            } else {
+                return date.toLocaleDateString('zh-CN', {
+                    month: 'short',
+                    day: 'numeric'
+                });
+            }
+        }
+
+        /**
+         * 延迟执行（用于动画效果）
+         */
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        /**
+         * 生成唯一ID
+         */
+        function generateId() {
+            return Math.random().toString(36).substr(2, 9);
+        }
+
+        // ============================================
+        // 数据获取
+        // ============================================
+        /**
+         * 加载 feeds.json 配置文件
+         */
+        async function loadFeedsConfig() {
+            try {
+                const response = await fetch('feeds.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const config = await response.json();
+                return config;
+            } catch (error) {
+                console.error('加载配置文件失败:', error);
+                throw error;
+            }
+        }
+
+        /**
+         * 通过 RSS2JSON API 获取 RSS 内容
+         */
+        async function fetchRSSFeed(url) {
+            try {
+                const apiUrl = `${RSS2JSON_API}${encodeURIComponent(url)}`;
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                if (data.status === 'ok') {
+                    return data.items;
+                } else {
+                    console.warn(`RSS 源 ${url} 返回错误:`, data.message);
+                    return [];
+                }
+            } catch (error) {
+                console.error(`获取 RSS 源 ${url} 失败:`, error);
+                return [];
+            }
+        }
+
+        // ============================================
+        // UI 渲染
+        // ============================================
+        /**
+         * 加载收藏网站配置
+         */
+        async function loadBookmarksConfig() {
+            try {
+                const response = await fetch('bookmarks.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const config = await response.json();
+                return config;
+            } catch (error) {
+                console.error('加载收藏配置失败:', error);
+                return null;
+            }
+        }
+
+        /**
+         * 渲染收藏网站
+         */
+        function renderBookmarks(config) {
+            const grid = document.getElementById('bookmarksGrid');
+
+            if (!config || !config.categories || config.categories.length === 0) {
+                grid.innerHTML = `
+                    <div class="error" style="grid-column: 1 / -1;">
+                        <p class="error-message">暂无收藏网站</p>
+                        <p class="error-details">请在 bookmarks.json 中添加你的收藏</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = config.categories.map((category, catIndex) => `
+                <div class="bookmark-category" style="animation: fadeInUp 0.6s ease-out ${catIndex * 0.1}s both;">
+                    <div class="bookmark-category-header">
+                        <span class="bookmark-category-icon">${category.icon || '📁'}</span>
+                        <h3 class="bookmark-category-name">${category.name}</h3>
+                    </div>
+                    <ul class="bookmark-list">
+                        ${category.bookmarks.map((bookmark, index) => `
+                            <li>
+                                <a href="${bookmark.url}" target="_blank" rel="noopener noreferrer" class="bookmark-item" style="animation-delay: ${index * 0.05}s;">
+                                    <span class="bookmark-icon">🔗</span>
+                                    <div class="bookmark-content">
+                                        <span class="bookmark-name">${bookmark.name}</span>
+                                        <span class="bookmark-description">${bookmark.description || ''}</span>
+                                    </div>
+                                </a>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `).join('');
+        }
+
+        /**
+         * 创建新闻卡片 HTML
+         */
+        function createFeedCard(feed, articles) {
+            const card = document.createElement('div');
+            card.className = 'feed-card';
+            card.dataset.category = feed.category;
+            card.dataset.feedName = feed.name;
+
+            const articlesHTML = articles
+                .slice(0, 5) // 只显示前5条
+                .map((article, index) => `
+                    <li class="article-item" style="animation-delay: ${index * 0.1}s">
+                        <a href="${article.link}" target="_blank" rel="noopener noreferrer" class="article-title">
+                            ${article.title}
+                        </a>
+                        <div class="article-meta">
+                            <span class="article-date">${formatRelativeTime(article.pubDate)}</span>
+                            <a href="${article.link}" target="_blank" rel="noopener noreferrer" class="article-link">
+                                阅读
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                            </a>
+                        </div>
+                    </li>
+                `).join('');
+
+            card.innerHTML = `
+                <div class="feed-header">
+                    <h2 class="feed-name">${feed.name}</h2>
+                    <span class="feed-category">${feed.category}</span>
+                </div>
+                ${feed.description ? `<p class="feed-description">${feed.description}</p>` : ''}
+                <ul class="articles-list">
+                    ${articlesHTML || '<li class="article-item">暂无新闻</li>'}
+                </ul>
+            `;
+
+            return card;
+        }
+
+        /**
+         * 渲染所有新闻卡片
+         */
+        function renderNewsGrid() {
+            const grid = document.getElementById('newsGrid');
+            grid.innerHTML = '';
+
+            let totalArticles = 0;
+
+            allFeeds.forEach((feed, index) => {
+                // 分类过滤
+                if (currentCategory !== 'all' && feed.category !== currentCategory) {
+                    return;
+                }
+
+                const articles = allArticles[feed.name] || [];
+                totalArticles += articles.length;
+
+                const card = createFeedCard(feed, articles);
+                card.style.animationDelay = `${index * 0.1}s`;
+                grid.appendChild(card);
+            });
+
+            if (grid.children.length === 0) {
+                grid.innerHTML = `
+                    <div class="error" style="grid-column: 1 / -1;">
+                        <div class="error-icon">📭</div>
+                        <p class="error-message">该分类暂无新闻源</p>
+                        <p class="error-details">请尝试选择其他分类</p>
+                    </div>
+                `;
+            }
+
+            // 更新统计信息
+            document.getElementById('feedCount').textContent =
+                `${allFeeds.filter(f => currentCategory === 'all' || f.category === currentCategory).length} 个源`;
+            document.getElementById('articleCount').textContent =
+                `${totalArticles} 篇文章`;
+            document.getElementById('lastUpdate').textContent =
+                `更新于 ${new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}`;
+        }
+
+        /**
+         * 显示加载状态
+         */
+        function showLoading() {
+            const grid = document.getElementById('newsGrid');
+            grid.innerHTML = `
+                <div class="loading" style="grid-column: 1 / -1;">
+                    <div class="loading-spinner"></div>
+                    <p>正在加载新闻源...</p>
+                </div>
+            `;
+        }
+
+        /**
+         * 显示错误信息
+         */
+        function showError(message) {
+            const grid = document.getElementById('newsGrid');
+            grid.innerHTML = `
+                <div class="error" style="grid-column: 1 / -1;">
+                    <div class="error-icon">⚠️</div>
+                    <p class="error-message">加载失败</p>
+                    <p class="error-details">${message}</p>
+                </div>
+            `;
+        }
+
+        // ============================================
+        // 事件处理
+        // ============================================
+        /**
+         * 收藏网站折叠/展开切换
+         */
+        function handleBookmarksToggle() {
+            const section = document.getElementById('bookmarksSection');
+            const toggle = document.getElementById('bookmarksToggle');
+            section.classList.toggle('bookmarks-collapsed');
+
+            if (section.classList.contains('bookmarks-collapsed')) {
+                toggle.textContent = '展开';
+            } else {
+                toggle.textContent = '收起';
+            }
+        }
+
+        /**
+         * 分类筛选器点击事件
+         */
+        function handleCategoryFilter(event) {
+            if (event.target.classList.contains('filter-btn')) {
+                // 更新按钮状态
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                event.target.classList.add('active');
+
+                // 更新当前分类
+                currentCategory = event.target.dataset.category;
+
+                // 重新渲染
+                renderNewsGrid();
+            }
+        }
+
+        /**
+         * 刷新按钮点击事件
+         */
+        async function handleRefresh() {
+            const btn = document.getElementById('refreshBtn');
+            btn.classList.add('rotating');
+            btn.disabled = true;
+
+            showLoading();
+            await loadAllNews();
+
+            btn.classList.remove('rotating');
+            btn.disabled = false;
+        }
+
+        /**
+         * 显示配置帮助
+         */
+        function showConfigHelp() {
+            alert(
+                '📝 NewsPulse 配置帮助\n\n' +
+                '1. 编辑 feeds.json 文件添加/删除新闻源\n' +
+                '2. 每个源需要 name、rss、description、category 字段\n' +
+                '3. 保存后刷新页面即可生效\n\n' +
+                '示例：\n' +
+                '{\n' +
+                '  "name": "媒体名称",\n' +
+                '  "rss": "https://example.com/feed",\n' +
+                '  "description": "简介",\n' +
+                '  "category": "Tech"\n' +
+                '}'
+            );
+        }
+
+        // ============================================
+        // 主逻辑
+        // ============================================
+        /**
+         * 加载所有新闻
+         */
+        async function loadAllNews() {
+            try {
+                showLoading();
+
+                // 加载配置
+                const config = await loadFeedsConfig();
+                allFeeds = config.feeds;
+
+                // 并行加载所有 RSS 源
+                const feedPromises = allFeeds.map(async feed => {
+                    const articles = await fetchRSSFeed(feed.rss);
+                    allArticles[feed.name] = articles;
+                    await delay(100); // 防止请求过快
+                });
+
+                await Promise.all(feedPromises);
+
+                // 渲染
+                renderNewsGrid();
+
+            } catch (error) {
+                console.error('加载新闻失败:', error);
+                showError(`无法加载配置文件: ${error.message}\n\n请确保 feeds.json 文件存在且格式正确。`);
+            }
+        }
+
+        /**
+         * 初始化应用
+         */
+        function init() {
+            // 绑定事件
+            document.getElementById('categoryFilters').addEventListener('click', handleCategoryFilter);
+            document.getElementById('refreshBtn').addEventListener('click', handleRefresh);
+            document.getElementById('bookmarksToggle').addEventListener('click', handleBookmarksToggle);
+
+            // 加载收藏网站
+            loadBookmarksConfig().then(config => {
+                renderBookmarks(config);
+            });
+
+            // 加载新闻
+            loadAllNews();
+        }
+
+        // ============================================
+        // 启动应用
+        // ============================================
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
