@@ -47,6 +47,12 @@
       "rss": "https://www.infoq.cn/feed",
       "description": "促进软件开发领域知识创新",
       "category": "Dev"
+    },
+    {
+      "name": "知乎 AI 热榜",
+      "rss": "https://www.zhihu.com/rss/topics/19554277/hot",
+      "description": "知乎人工智能话题热榜",
+      "category": "AI"
     }
   ],
   "settings": {
