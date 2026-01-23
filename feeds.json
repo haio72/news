@@ -7,12 +7,6 @@
       "category": "AI"
     },
     {
-      "name": "极客公园",
-      "rss": "https://www.geekpark.net/rss",
-      "description": "创新与科技媒体",
-      "category": "Tech"
-    },
-    {
       "name": "Hacker News",
       "rss": "https://news.ycombinator.com/rss",
       "description": "计算机科学与创业",
@@ -23,12 +17,6 @@
       "rss": "https://36kr.com/feed",
       "description": "领先的科技创投媒体",
       "category": "Business"
-    },
-    {
-      "name": "虎嗅网",
-      "rss": "https://www.huxiu.com/rss/0",
-      "description": "科技创新与商业",
-      "category": "Tech"
     },
     {
       "name": "MIT Technology Review",
@@ -47,12 +35,6 @@
       "rss": "https://www.infoq.cn/feed",
       "description": "促进软件开发领域知识创新",
       "category": "Dev"
-    },
-    {
-      "name": "知乎 AI 热榜",
-      "rss": "https://rsshub.app/zhihu/hot/topics/19554277",
-      "description": "知乎人工智能话题热榜（通过 RSSHub）",
-      "category": "AI"
     },
     {
       "name": "量子位",
