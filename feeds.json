@@ -50,8 +50,20 @@
     },
     {
       "name": "知乎 AI 热榜",
-      "rss": "https://www.zhihu.com/rss/topics/19554277/hot",
-      "description": "知乎人工智能话题热榜",
+      "rss": "https://rsshub.app/zhihu/hot/topics/19554277",
+      "description": "知乎人工智能话题热榜（通过 RSSHub）",
+      "category": "AI"
+    },
+    {
+      "name": "量子位",
+      "rss": "https://www.qbitai.com/feed",
+      "description": "关注前沿科技与人工智能",
+      "category": "AI"
+    },
+    {
+      "name": "新智元",
+      "rss": "https://www.shenjianlife.com/feed",
+      "description": "人工智能与科技媒体",
       "category": "AI"
     }
   ],
