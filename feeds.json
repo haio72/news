@@ -7,9 +7,9 @@
       "category": "AI"
     },
     {
-      "name": "TechCrunch",
-      "rss": "https://techcrunch.com/feed/",
-      "description": "科技创业与投资新闻",
+      "name": "极客公园",
+      "rss": "https://www.geekpark.net/rss",
+      "description": "创新与科技媒体",
       "category": "Tech"
     },
     {
@@ -25,9 +25,9 @@
       "category": "Business"
     },
     {
-      "name": "The Verge",
-      "rss": "https://www.theverge.com/rss/index.xml",
-      "description": "科技、文化与互联网",
+      "name": "虎嗅网",
+      "rss": "https://www.huxiu.com/rss/0",
+      "description": "科技创新与商业",
       "category": "Tech"
     },
     {
@@ -37,10 +37,10 @@
       "category": "AI"
     },
     {
-      "name": "Wired",
-      "rss": "https://www.wired.com/feed/rss",
-      "description": "科技如何改变文化",
-      "category": "Tech"
+      "name": "钛媒体",
+      "rss": "https://www.tmtpost.com/rss",
+      "description": "科技财经媒体",
+      "category": "Business"
     },
     {
       "name": "InfoQ",
@@ -58,12 +58,6 @@
       "name": "量子位",
       "rss": "https://www.qbitai.com/feed",
       "description": "关注前沿科技与人工智能",
-      "category": "AI"
-    },
-    {
-      "name": "新智元",
-      "rss": "https://www.shenjianlife.com/feed",
-      "description": "人工智能与科技媒体",
       "category": "AI"
     }
   ],
