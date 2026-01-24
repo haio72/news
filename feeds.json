@@ -41,6 +41,12 @@
       "rss": "https://www.qbitai.com/feed",
       "description": "关注前沿科技与人工智能",
       "category": "AI"
+    },
+    {
+      "name": "爱集微",
+      "rss": "https://www.laoyaoba.com/api/rss/hbb",
+      "description": "电子信息行业媒体",
+      "category": "Tech"
     }
   ],
   "settings": {
