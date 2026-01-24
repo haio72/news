@@ -50,7 +50,7 @@
     }
   ],
   "settings": {
-    "articlesPerFeed": 5,
+    "articlesPerFeed": 10,
     "refreshInterval": 30,
     "cacheDuration": 60,
     "showCategories": true,
