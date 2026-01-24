@@ -972,7 +972,7 @@
             card.dataset.feedName = feed.name;
 
             const articlesHTML = articles
-                .slice(0, 5) // 只显示前5条
+                .slice(0, 10) // 只显示前10条
                 .map((article, index) => `
                     <li class="article-item" style="animation-delay: ${index * 0.1}s">
                         <a href="${article.link}" target="_blank" rel="noopener noreferrer" class="article-title">
