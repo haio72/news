@@ -130,6 +130,27 @@
           "description": "快速网盘资源检索"
         }
       ]
+    },
+    {
+      "name": "影视资源",
+      "icon": "🎬",
+      "bookmarks": [
+        {
+          "name": "Gaze",
+          "url": "https://gaze.run",
+          "description": "在线影视资源网站"
+        },
+        {
+          "name": "小站影视剧",
+          "url": "https://www.zxzjys.com",
+          "description": "影视剧资源平台"
+        },
+        {
+          "name": "修罗影视",
+          "url": "https://xl01.com.de",
+          "description": "影视资源站点"
+        }
+      ]
     }
   ]
 }
