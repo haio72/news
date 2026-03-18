@@ -116,17 +116,17 @@
       "bookmarks": [
         {
           "name": "AiPan",
-          "url": "https://www.aipan.me/",
+          "url": "wwwaipan-me",
           "description": "AI 驱动的网盘资源搜索引擎"
         },
         {
           "name": "PanHub",
-          "url": "https://panhub.shenzjd.com/",
+          "url": "panhub-shenzjd-com",
           "description": "多网盘资源搜索工具"
         },
         {
           "name": "PanSou",
-          "url": "https://pansou.jkai.de/",
+          "url": "pansou-jkai-de",
           "description": "快速网盘资源检索"
         }
       ]
@@ -137,17 +137,17 @@
       "bookmarks": [
         {
           "name": "Gaze",
-          "url": "https://gaze.run",
+          "url": "gaze-run",
           "description": "在线影视资源网站"
         },
         {
           "name": "小站影视剧",
-          "url": "https://www.zxzjys.com",
+          "url": "www-zxzjys-com",
           "description": "影视剧资源平台"
         },
         {
           "name": "修罗影视",
-          "url": "https://xl01.com.de",
+          "url": "xl01-com-de",
           "description": "影视资源站点"
         }
       ]
