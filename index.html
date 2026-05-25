@@ -259,6 +259,196 @@
         }
 
         /* ============================================
+           HOT TRENDS SECTION
+           ============================================ */
+        .section-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .section-meta {
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            text-align: right;
+        }
+
+        .hot-section {
+            margin-bottom: var(--space-xl);
+            animation: fadeIn 0.8s ease-out 0.25s both;
+        }
+
+        .hot-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+            padding: var(--space-md);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(255, 255, 255, 0.02));
+        }
+
+        .hot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .hot-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all var(--transition-normal);
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .hot-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-primary);
+            box-shadow: var(--shadow-md), var(--shadow-glow);
+        }
+
+        .hot-card.status-restricted {
+            border-color: rgba(245, 158, 11, 0.55);
+        }
+
+        .hot-card.status-error {
+            border-color: rgba(239, 68, 68, 0.6);
+        }
+
+        .hot-card-header {
+            padding: var(--space-md);
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: var(--space-sm);
+        }
+
+        .hot-source-name {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .hot-badges {
+            display: flex;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            flex-shrink: 0;
+        }
+
+        .hot-badge {
+            font-size: 0.62rem;
+            padding: 0.22rem 0.45rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .hot-badge.ok {
+            border-color: rgba(34, 197, 94, 0.5);
+            color: #86efac;
+        }
+
+        .hot-badge.restricted {
+            border-color: rgba(245, 158, 11, 0.6);
+            color: var(--accent-primary);
+        }
+
+        .hot-badge.error {
+            border-color: rgba(239, 68, 68, 0.6);
+            color: #fca5a5;
+        }
+
+        .hot-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .hot-item {
+            display: grid;
+            grid-template-columns: 2.5rem minmax(0, 1fr);
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-md);
+            border-bottom: 1px solid var(--border-color);
+            transition: background var(--transition-fast);
+        }
+
+        .hot-item:last-child {
+            border-bottom: none;
+        }
+
+        .hot-item:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .hot-rank {
+            color: var(--accent-primary);
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.2;
+            text-align: right;
+        }
+
+        .hot-title {
+            color: var(--text-primary);
+            font-family: var(--font-display);
+            font-weight: 600;
+            text-decoration: none;
+            line-height: 1.35;
+            display: block;
+            overflow-wrap: anywhere;
+        }
+
+        .hot-title:hover {
+            color: var(--accent-primary);
+        }
+
+        .hot-item-meta {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            margin-top: 0.35rem;
+            color: var(--text-muted);
+            font-size: 0.68rem;
+        }
+
+        .hot-message {
+            padding: var(--space-md);
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            line-height: 1.6;
+        }
+
+        .rss-section {
+            margin-top: var(--space-xl);
+        }
+
+        /* ============================================
            BOOKMARKS SECTION
            ============================================ */
         .bookmarks-section {
@@ -449,12 +639,21 @@
                 0 0 0 1px var(--border-glow);
         }
 
+        .feed-card.feed-stale {
+            border-color: rgba(245, 158, 11, 0.55);
+        }
+
+        .feed-card.feed-error {
+            border-color: rgba(239, 68, 68, 0.6);
+        }
+
         .feed-header {
             padding: var(--space-md);
             border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: var(--space-sm);
             background: var(--bg-secondary);
         }
 
@@ -463,17 +662,52 @@
             font-size: 1.25rem;
             font-weight: 600;
             color: var(--text-primary);
+            min-width: 0;
         }
 
-        .feed-category {
+        .feed-badges {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            flex-shrink: 0;
+        }
+
+        .feed-category,
+        .feed-status {
             font-size: 0.65rem;
             padding: 0.25rem 0.5rem;
-            background: var(--accent-primary);
-            color: var(--bg-primary);
             text-transform: uppercase;
             letter-spacing: 0.1em;
             border-radius: 4px;
             font-weight: 600;
+        }
+
+        .feed-category {
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+        }
+
+        .feed-status {
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .feed-status.fresh {
+            border-color: rgba(34, 197, 94, 0.5);
+            color: #86efac;
+        }
+
+        .feed-status.stale {
+            border-color: rgba(245, 158, 11, 0.6);
+            color: var(--accent-primary);
+        }
+
+        .feed-status.error {
+            border-color: rgba(239, 68, 68, 0.6);
+            color: #fca5a5;
         }
 
         .feed-description {
@@ -481,6 +715,37 @@
             color: var(--text-muted);
             padding: var(--space-sm) var(--space-md);
             font-style: italic;
+        }
+
+        .feed-freshness {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.5rem var(--space-sm);
+            padding: 0 var(--space-md) var(--space-sm);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+
+        .freshness-item {
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .freshness-label {
+            color: var(--text-secondary);
+        }
+
+        .feed-error-message {
+            margin: 0 var(--space-md) var(--space-sm);
+            padding: 0.65rem 0.75rem;
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            border-radius: 6px;
+            color: #fca5a5;
+            background: rgba(239, 68, 68, 0.08);
+            font-size: 0.7rem;
+            line-height: 1.5;
         }
 
         .articles-list {
@@ -714,6 +979,41 @@
                 justify-content: center;
             }
 
+            .section-heading,
+            .hot-controls {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .section-meta {
+                text-align: left;
+            }
+
+            .hot-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hot-card-header {
+                flex-direction: column;
+            }
+
+            .hot-badges {
+                justify-content: flex-start;
+            }
+
+            .feed-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .feed-badges {
+                justify-content: flex-start;
+            }
+
+            .feed-freshness {
+                grid-template-columns: 1fr;
+            }
+
             .footer-content {
                 flex-direction: column;
                 text-align: center;
@@ -753,6 +1053,36 @@
             </div>
         </header>
 
+        <!-- 实时热榜区域 -->
+        <section class="hot-section" id="hotSection">
+            <div class="section-heading">
+                <h2 class="section-title">
+                    <span>🔥</span>
+                    实时热榜
+                </h2>
+                <div class="section-meta" id="hotMeta">等待加载热榜...</div>
+            </div>
+            <div class="hot-controls">
+                <div class="filter-group" id="hotCategoryFilters">
+                    <button class="filter-btn active" data-category="all">全部</button>
+                </div>
+                <button class="refresh-btn" id="hotRefreshBtn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23 4 23 10 17 10"></polyline>
+                        <polyline points="1 20 1 14 7 14"></polyline>
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                    </svg>
+                    刷新热榜
+                </button>
+            </div>
+            <div class="hot-grid" id="hotGrid">
+                <div class="loading" style="grid-column: 1 / -1;">
+                    <div class="loading-spinner"></div>
+                    <p>正在加载实时热榜...</p>
+                </div>
+            </div>
+        </section>
+
         <!-- 收藏网站区域 -->
         <section class="bookmarks-section" id="bookmarksSection">
             <div class="bookmarks-header">
@@ -790,17 +1120,26 @@
         </div>
 
         <!-- 新闻网格 -->
-        <main class="news-grid" id="newsGrid">
-            <div class="loading">
-                <div class="loading-spinner"></div>
-                <p>正在加载新闻源...</p>
+        <section class="rss-section">
+            <div class="section-heading">
+                <h2 class="section-title">
+                    <span>📰</span>
+                    文章订阅
+                </h2>
+                <div class="section-meta">RSS 适合长文章订阅，不承担实时热榜</div>
             </div>
-        </main>
+            <main class="news-grid" id="newsGrid">
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>正在加载新闻源...</p>
+                </div>
+            </main>
+        </section>
 
         <!-- 页脚 -->
         <footer class="footer">
             <div class="footer-content">
-                <p>© 2026 NewsPulse. 纯静态新闻聚合器</p>
+                <p>© 2026 NewsPulse. 个人热榜与新闻聚合器</p>
                 <div class="footer-links">
                     <a href="https://github.com" class="footer-link" target="_blank">GitHub</a>
                     <a href="#" class="footer-link" onclick="showConfigHelp(); return false;">配置帮助</a>
@@ -815,10 +1154,33 @@
         // ============================================
         let allFeeds = [];
         let allArticles = {};
+        let allFeedMeta = {};
         let currentCategory = 'all';
+        let hotSources = [];
+        let hotCurrentCategory = 'all';
+        let hotSettings = {};
+        let hotRefreshTimer = null;
+        let appSettings = {};
+        let refreshTimer = null;
+
+        const DEFAULT_SETTINGS = {
+            articlesPerFeed: 10,
+            refreshInterval: 30,
+            staleThresholdMinutes: 180,
+            requestTimeoutMs: 12000,
+            maxConcurrentRequests: 4
+        };
+
+        const DEFAULT_HOT_SETTINGS = {
+            refreshInterval: 5,
+            requestTimeoutMs: 10000,
+            itemsPerSource: 12
+        };
 
         // RSS 转 JSON 代理 API（解决跨域问题）
         const RSS2JSON_API = 'https://api.rss2json.com/v1/api.json?rss_url=';
+        const ALLORIGINS_RAW_API = 'https://api.allorigins.win/raw?url=';
+        const DEFAULT_HOT_API = 'https://newspulse-hot-api.haioae17.workers.dev/api/hot';
 
         // ============================================
         // 工具函数
@@ -828,11 +1190,18 @@
          */
         function formatRelativeTime(dateString) {
             const date = new Date(dateString);
+            if (Number.isNaN(date.getTime())) {
+                return '未知';
+            }
             const now = new Date();
             const diffMs = now - date;
             const diffMins = Math.floor(diffMs / 60000);
             const diffHours = Math.floor(diffMs / 3600000);
             const diffDays = Math.floor(diffMs / 86400000);
+
+            if (diffMins < 1) {
+                return '刚刚';
+            }
 
             if (diffMins < 60) {
                 return `${diffMins}分钟前`;
@@ -856,21 +1225,266 @@
         }
 
         /**
-         * 生成唯一ID
+         * 基础 HTML 转义，避免 RSS 标题里的特殊字符破坏页面结构
          */
-        function generateId() {
-            return Math.random().toString(36).substr(2, 9);
+        function escapeHTML(value) {
+            return String(value || '').replace(/[&<>"']/g, char => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            }[char]));
+        }
+
+        /**
+         * 给 URL 加时间戳，降低浏览器/CDN 缓存命中概率
+         */
+        function withCacheBuster(url) {
+            try {
+                const parsed = new URL(url);
+                parsed.searchParams.set('_np', Date.now().toString());
+                return parsed.toString();
+            } catch (error) {
+                const separator = url.includes('?') ? '&' : '?';
+                return `${url}${separator}_np=${Date.now()}`;
+            }
+        }
+
+        function formatClock(dateString) {
+            if (!dateString) return '未知';
+            return new Date(dateString).toLocaleTimeString('zh-CN', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function getArticleDate(article) {
+            const value = article.pubDate || article.isoDate || article.published || article.updated;
+            const date = new Date(value);
+            return Number.isNaN(date.getTime()) ? null : date;
+        }
+
+        function normalizeArticle(article) {
+            const pubDate = article.pubDate || article.isoDate || article.published || article.updated || new Date().toISOString();
+            return {
+                title: article.title || '未命名文章',
+                link: article.link || article.guid || '#',
+                pubDate,
+                author: article.author || '',
+                description: article.description || article.content || ''
+            };
+        }
+
+        function sortArticlesByDate(articles) {
+            return articles
+                .map(normalizeArticle)
+                .sort((a, b) => {
+                    const dateA = getArticleDate(a);
+                    const dateB = getArticleDate(b);
+                    return (dateB ? dateB.getTime() : 0) - (dateA ? dateA.getTime() : 0);
+                });
+        }
+
+        function getTextContent(node, selectors) {
+            for (const selector of selectors) {
+                const match = node.querySelector(selector);
+                if (match && match.textContent.trim()) {
+                    return match.textContent.trim();
+                }
+            }
+            return '';
+        }
+
+        function getLinkFromEntry(entry) {
+            const atomLink = entry.querySelector('link[href]');
+            if (atomLink) {
+                return atomLink.getAttribute('href');
+            }
+
+            const rssLink = entry.querySelector('link');
+            return rssLink ? rssLink.textContent.trim() : '';
+        }
+
+        function parseRSSXML(xmlText) {
+            const doc = new DOMParser().parseFromString(xmlText, 'text/xml');
+            const parserError = doc.querySelector('parsererror');
+            if (parserError) {
+                throw new Error('RSS XML 解析失败');
+            }
+
+            const entries = Array.from(doc.querySelectorAll('item, entry'));
+            return sortArticlesByDate(entries.map(entry => ({
+                title: getTextContent(entry, ['title']),
+                link: getLinkFromEntry(entry),
+                pubDate: getTextContent(entry, ['pubDate', 'published', 'updated', 'dc\\:date']),
+                author: getTextContent(entry, ['author name', 'creator', 'dc\\:creator']),
+                description: getTextContent(entry, ['description', 'summary', 'content'])
+            })));
+        }
+
+        async function fetchWithTimeout(url, options = {}) {
+            const controller = new AbortController();
+            const requestTimeoutMs = appSettings.requestTimeoutMs || hotSettings.requestTimeoutMs || DEFAULT_SETTINGS.requestTimeoutMs;
+            const timeout = setTimeout(() => controller.abort(), requestTimeoutMs);
+
+            try {
+                return await fetch(url, {
+                    cache: 'no-store',
+                    ...options,
+                    signal: controller.signal
+                });
+            } finally {
+                clearTimeout(timeout);
+            }
+        }
+
+        async function fetchDirectRSS(url) {
+            const response = await fetchWithTimeout(withCacheBuster(url));
+            if (!response.ok) {
+                throw new Error(`直接抓取失败 (${response.status})`);
+            }
+
+            const xmlText = await response.text();
+            const articles = parseRSSXML(xmlText);
+            return { articles, source: 'direct' };
+        }
+
+        async function fetchRSS2JSON(url) {
+            const apiUrl = `${RSS2JSON_API}${encodeURIComponent(withCacheBuster(url))}`;
+            const response = await fetchWithTimeout(apiUrl);
+            if (!response.ok) {
+                throw new Error(`RSS2JSON 请求失败 (${response.status})`);
+            }
+
+            const data = await response.json();
+            if (data.status !== 'ok') {
+                throw new Error(data.message || 'RSS2JSON 返回错误');
+            }
+
+            return {
+                articles: sortArticlesByDate(data.items || []),
+                source: 'rss2json'
+            };
+        }
+
+        async function fetchAllOriginsRSS(url) {
+            const apiUrl = `${ALLORIGINS_RAW_API}${encodeURIComponent(withCacheBuster(url))}`;
+            const response = await fetchWithTimeout(apiUrl);
+            if (!response.ok) {
+                throw new Error(`AllOrigins 请求失败 (${response.status})`);
+            }
+
+            const xmlText = await response.text();
+            return {
+                articles: parseRSSXML(xmlText),
+                source: 'allorigins'
+            };
+        }
+
+        async function fetchWithFallbacks(url) {
+            const errors = [];
+            const attempts = [fetchDirectRSS, fetchRSS2JSON, fetchAllOriginsRSS];
+
+            for (const attempt of attempts) {
+                try {
+                    const result = await attempt(url);
+                    if (result.articles.length > 0) {
+                        return result;
+                    }
+                    errors.push('返回 0 篇文章');
+                } catch (error) {
+                    errors.push(error.message);
+                }
+            }
+
+            throw new Error(errors.join('；'));
+        }
+
+        function getFeedStatus(articles, error) {
+            if (error) {
+                return {
+                    key: 'error',
+                    label: '加载失败',
+                    latestAt: null
+                };
+            }
+
+            const latestDate = articles.reduce((latest, article) => {
+                const date = getArticleDate(article);
+                if (!date) return latest;
+                return !latest || date > latest ? date : latest;
+            }, null);
+
+            if (!latestDate) {
+                return {
+                    key: 'stale',
+                    label: '可能滞后',
+                    latestAt: null
+                };
+            }
+
+            const ageMinutes = (Date.now() - latestDate.getTime()) / 60000;
+            const isStale = ageMinutes > appSettings.staleThresholdMinutes;
+
+            return {
+                key: isStale ? 'stale' : 'fresh',
+                label: isStale ? '可能滞后' : '正常',
+                latestAt: latestDate.toISOString()
+            };
+        }
+
+        async function runWithConcurrency(items, limit, worker) {
+            const queue = [...items];
+            const workerCount = Math.max(1, Math.min(Number(limit) || DEFAULT_SETTINGS.maxConcurrentRequests, items.length));
+            const workers = Array.from({ length: workerCount }, async () => {
+                while (queue.length > 0) {
+                    const item = queue.shift();
+                    await worker(item);
+                    await delay(100);
+                }
+            });
+
+            await Promise.all(workers);
         }
 
         // ============================================
         // 数据获取
         // ============================================
+        function getHotApiUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const override = params.get('hotApi');
+            if (override) {
+                return override;
+            }
+
+            return DEFAULT_HOT_API;
+        }
+
+        async function loadHotSourcesConfig() {
+            const response = await fetch(withCacheBuster('hot-sources.json'), { cache: 'no-store' });
+            if (!response.ok) {
+                throw new Error(`热榜配置加载失败 (${response.status})`);
+            }
+
+            return response.json();
+        }
+
+        async function fetchHotData() {
+            const response = await fetchWithTimeout(withCacheBuster(getHotApiUrl()));
+            if (!response.ok) {
+                throw new Error(`热榜 API 请求失败 (${response.status})`);
+            }
+
+            return response.json();
+        }
+
         /**
          * 加载 feeds.json 配置文件
          */
         async function loadFeedsConfig() {
             try {
-                const response = await fetch('feeds.json');
+                const response = await fetch(withCacheBuster('feeds.json'), { cache: 'no-store' });
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -882,23 +1496,27 @@
             }
         }
 
-        /**
-         * 通过 RSS2JSON API 获取 RSS 内容
-         */
-        async function fetchRSSFeed(url) {
+        async function fetchRSSFeed(feed) {
+            const checkedAt = new Date().toISOString();
             try {
-                const apiUrl = `${RSS2JSON_API}${encodeURIComponent(url)}`;
-                const response = await fetch(apiUrl);
-                const data = await response.json();
-
-                if (data.status === 'ok') {
-                    return data.items;
-                } else {
-                    console.warn(`RSS 源 ${url} 返回错误:`, data.message);
-                    return [];
-                }
+                const result = await fetchWithFallbacks(feed.rss);
+                const status = getFeedStatus(result.articles, null);
+                allFeedMeta[feed.name] = {
+                    ...status,
+                    source: result.source,
+                    checkedAt,
+                    error: ''
+                };
+                return result.articles;
             } catch (error) {
-                console.error(`获取 RSS 源 ${url} 失败:`, error);
+                console.error(`获取 RSS 源 ${feed.name} 失败:`, error);
+                const status = getFeedStatus([], error);
+                allFeedMeta[feed.name] = {
+                    ...status,
+                    source: 'none',
+                    checkedAt,
+                    error: error.message
+                };
                 return [];
             }
         }
@@ -911,7 +1529,7 @@
          */
         async function loadBookmarksConfig() {
             try {
-                const response = await fetch('bookmarks.json');
+                const response = await fetch(withCacheBuster('bookmarks.json'), { cache: 'no-store' });
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -962,25 +1580,176 @@
             `).join('');
         }
 
+        function renderCategoryFilters() {
+            const filters = document.getElementById('categoryFilters');
+            const categories = [...new Set(allFeeds.map(feed => feed.category).filter(Boolean))];
+            const buttons = [
+                { label: '全部', value: 'all' },
+                ...categories.map(category => ({ label: category, value: category }))
+            ];
+
+            if (currentCategory !== 'all' && !categories.includes(currentCategory)) {
+                currentCategory = 'all';
+            }
+
+            filters.innerHTML = buttons.map(button => `
+                <button class="filter-btn ${button.value === currentCategory ? 'active' : ''}" data-category="${escapeHTML(button.value)}">
+                    ${escapeHTML(button.label)}
+                </button>
+            `).join('');
+        }
+
+        function renderHotCategoryFilters() {
+            const filters = document.getElementById('hotCategoryFilters');
+            const categories = [...new Set(hotSources.map(source => source.category).filter(Boolean))];
+            const buttons = [
+                { label: '全部', value: 'all' },
+                ...categories.map(category => ({ label: category, value: category }))
+            ];
+
+            if (hotCurrentCategory !== 'all' && !categories.includes(hotCurrentCategory)) {
+                hotCurrentCategory = 'all';
+            }
+
+            filters.innerHTML = buttons.map(button => `
+                <button class="filter-btn ${button.value === hotCurrentCategory ? 'active' : ''}" data-category="${escapeHTML(button.value)}">
+                    ${escapeHTML(button.label)}
+                </button>
+            `).join('');
+        }
+
+        function createHotCard(source, index) {
+            const card = document.createElement('article');
+            const statusKey = source.status === '正常'
+                ? 'ok'
+                : source.status === '可能受限'
+                    ? 'restricted'
+                    : 'error';
+            const items = source.items || [];
+            card.className = `hot-card status-${statusKey}`;
+            card.dataset.category = source.category;
+            card.style.animationDelay = `${index * 0.08}s`;
+
+            const itemsHTML = items.map(item => `
+                <li class="hot-item">
+                    <div class="hot-rank">${escapeHTML(item.rank || '')}</div>
+                    <div>
+                        <a class="hot-title" href="${escapeHTML(item.url || source.homepage)}" target="_blank" rel="noopener noreferrer">
+                            ${escapeHTML(item.title)}
+                        </a>
+                        <div class="hot-item-meta">
+                            ${item.hot ? `<span>${escapeHTML(item.hot)}</span>` : ''}
+                            ${item.summary ? `<span>${escapeHTML(item.summary)}</span>` : ''}
+                            ${item.extra ? `<span>${escapeHTML(item.extra)}</span>` : ''}
+                        </div>
+                    </div>
+                </li>
+            `).join('');
+
+            card.innerHTML = `
+                <div class="hot-card-header">
+                    <div>
+                        <h3 class="hot-source-name">${escapeHTML(source.name)}</h3>
+                        <div class="hot-item-meta">
+                            <span>${escapeHTML(source.category || '未分类')}</span>
+                            <span>检查：${formatClock(source.checkedAt)}</span>
+                        </div>
+                    </div>
+                    <div class="hot-badges">
+                        <span class="hot-badge ${statusKey}">${escapeHTML(source.status || '未知')}</span>
+                        <a class="hot-badge" href="${escapeHTML(source.homepage || '#')}" target="_blank" rel="noopener noreferrer">源站</a>
+                    </div>
+                </div>
+                ${itemsHTML ? `<ol class="hot-list">${itemsHTML}</ol>` : `<div class="hot-message">${escapeHTML(source.message || '暂无热榜数据')}</div>`}
+            `;
+
+            return card;
+        }
+
+        function renderHotGrid() {
+            const grid = document.getElementById('hotGrid');
+            grid.innerHTML = '';
+
+            const visibleSources = hotSources.filter(source =>
+                hotCurrentCategory === 'all' || source.category === hotCurrentCategory
+            );
+            const totalItems = visibleSources.reduce((sum, source) => sum + (source.items || []).length, 0);
+
+            visibleSources.forEach((source, index) => {
+                grid.appendChild(createHotCard(source, index));
+            });
+
+            if (grid.children.length === 0) {
+                grid.innerHTML = `
+                    <div class="error" style="grid-column: 1 / -1;">
+                        <div class="error-icon">📭</div>
+                        <p class="error-message">该分类暂无热榜源</p>
+                        <p class="error-details">请尝试选择其他分类</p>
+                    </div>
+                `;
+            }
+
+            document.getElementById('hotMeta').textContent =
+                `${visibleSources.length} 个热榜源 · ${totalItems} 条 · 更新于 ${new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}`;
+        }
+
+        function showHotLoading() {
+            const grid = document.getElementById('hotGrid');
+            grid.innerHTML = `
+                <div class="loading" style="grid-column: 1 / -1;">
+                    <div class="loading-spinner"></div>
+                    <p>正在加载实时热榜...</p>
+                </div>
+            `;
+        }
+
+        function showHotError(message) {
+            const grid = document.getElementById('hotGrid');
+            grid.innerHTML = `
+                <div class="error" style="grid-column: 1 / -1;">
+                    <div class="error-icon">⚠️</div>
+                    <p class="error-message">热榜 API 暂不可用</p>
+                    <p class="error-details">${escapeHTML(message)}</p>
+                    <p class="error-details">本地预览需另启 Worker；部署到 Cloudflare 后使用同源 /api/hot。</p>
+                </div>
+            `;
+            document.getElementById('hotMeta').textContent = '热榜接口未连接';
+        }
+
         /**
          * 创建新闻卡片 HTML
          */
         function createFeedCard(feed, articles) {
             const card = document.createElement('div');
-            card.className = 'feed-card';
+            const meta = allFeedMeta[feed.name] || {
+                key: 'stale',
+                label: '待检查',
+                source: 'none',
+                checkedAt: '',
+                latestAt: '',
+                error: ''
+            };
+            card.className = `feed-card feed-${meta.key}`;
             card.dataset.category = feed.category;
             card.dataset.feedName = feed.name;
 
+            const displayArticles = articles.slice(0, appSettings.articlesPerFeed);
+            const sourceLabels = {
+                direct: '直连',
+                rss2json: 'RSS2JSON',
+                allorigins: 'AllOrigins',
+                none: '无'
+            };
             const articlesHTML = articles
-                .slice(0, 10) // 只显示前10条
+                .slice(0, appSettings.articlesPerFeed)
                 .map((article, index) => `
                     <li class="article-item" style="animation-delay: ${index * 0.1}s">
-                        <a href="${article.link}" target="_blank" rel="noopener noreferrer" class="article-title">
-                            ${article.title}
+                        <a href="${escapeHTML(article.link)}" target="_blank" rel="noopener noreferrer" class="article-title">
+                            ${escapeHTML(article.title)}
                         </a>
                         <div class="article-meta">
                             <span class="article-date">${formatRelativeTime(article.pubDate)}</span>
-                            <a href="${article.link}" target="_blank" rel="noopener noreferrer" class="article-link">
+                            <a href="${escapeHTML(article.link)}" target="_blank" rel="noopener noreferrer" class="article-link">
                                 阅读
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -994,10 +1763,20 @@
 
             card.innerHTML = `
                 <div class="feed-header">
-                    <h2 class="feed-name">${feed.name}</h2>
-                    <span class="feed-category">${feed.category}</span>
+                    <h2 class="feed-name">${escapeHTML(feed.name)}</h2>
+                    <div class="feed-badges">
+                        <span class="feed-status ${meta.key}">${meta.label}</span>
+                        <span class="feed-category">${escapeHTML(feed.category)}</span>
+                    </div>
                 </div>
-                ${feed.description ? `<p class="feed-description">${feed.description}</p>` : ''}
+                ${feed.description ? `<p class="feed-description">${escapeHTML(feed.description)}</p>` : ''}
+                <div class="feed-freshness">
+                    <div class="freshness-item"><span class="freshness-label">最新：</span>${meta.latestAt ? formatRelativeTime(meta.latestAt) : '未知'}</div>
+                    <div class="freshness-item"><span class="freshness-label">检查：</span>${formatClock(meta.checkedAt)}</div>
+                    <div class="freshness-item"><span class="freshness-label">通道：</span>${sourceLabels[meta.source] || meta.source}</div>
+                    <div class="freshness-item"><span class="freshness-label">显示：</span>${displayArticles.length}/${articles.length}</div>
+                </div>
+                ${meta.error ? `<div class="feed-error-message">${escapeHTML(meta.error)}</div>` : ''}
                 <ul class="articles-list">
                     ${articlesHTML || '<li class="article-item">暂无新闻</li>'}
                 </ul>
@@ -1099,7 +1878,7 @@
         function handleCategoryFilter(event) {
             if (event.target.classList.contains('filter-btn')) {
                 // 更新按钮状态
-                document.querySelectorAll('.filter-btn').forEach(btn => {
+                document.querySelectorAll('#categoryFilters .filter-btn').forEach(btn => {
                     btn.classList.remove('active');
                 });
                 event.target.classList.add('active');
@@ -1112,19 +1891,46 @@
             }
         }
 
+        function handleHotCategoryFilter(event) {
+            if (event.target.classList.contains('filter-btn')) {
+                document.querySelectorAll('#hotCategoryFilters .filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                event.target.classList.add('active');
+                hotCurrentCategory = event.target.dataset.category;
+                renderHotGrid();
+            }
+        }
+
         /**
          * 刷新按钮点击事件
          */
+        async function handleHotRefresh() {
+            const btn = document.getElementById('hotRefreshBtn');
+            btn.classList.add('rotating');
+            btn.disabled = true;
+
+            try {
+                showHotLoading();
+                await loadHotTrends();
+            } finally {
+                btn.classList.remove('rotating');
+                btn.disabled = false;
+            }
+        }
+
         async function handleRefresh() {
             const btn = document.getElementById('refreshBtn');
             btn.classList.add('rotating');
             btn.disabled = true;
 
-            showLoading();
-            await loadAllNews();
-
-            btn.classList.remove('rotating');
-            btn.disabled = false;
+            try {
+                showLoading();
+                await loadAllNews();
+            } finally {
+                btn.classList.remove('rotating');
+                btn.disabled = false;
+            }
         }
 
         /**
@@ -1149,25 +1955,85 @@
         // ============================================
         // 主逻辑
         // ============================================
+        function setupHotAutoRefresh() {
+            if (hotRefreshTimer) {
+                clearInterval(hotRefreshTimer);
+                hotRefreshTimer = null;
+            }
+
+            const intervalMinutes = Number(hotSettings.refreshInterval);
+            if (!intervalMinutes || intervalMinutes <= 0) {
+                return;
+            }
+
+            hotRefreshTimer = setInterval(() => {
+                loadHotTrends({ silent: true });
+            }, intervalMinutes * 60000);
+        }
+
+        async function loadHotTrends(options = {}) {
+            try {
+                if (!options.silent) {
+                    showHotLoading();
+                }
+
+                const config = await loadHotSourcesConfig();
+                hotSettings = {
+                    ...DEFAULT_HOT_SETTINGS,
+                    ...(config.settings || {})
+                };
+                setupHotAutoRefresh();
+
+                const data = await fetchHotData();
+                hotSources = data.sources || [];
+                renderHotCategoryFilters();
+                renderHotGrid();
+            } catch (error) {
+                console.error('加载热榜失败:', error);
+                showHotError(error.message);
+            }
+        }
+
+        function setupAutoRefresh() {
+            if (refreshTimer) {
+                clearInterval(refreshTimer);
+                refreshTimer = null;
+            }
+
+            const intervalMinutes = Number(appSettings.refreshInterval);
+            if (!intervalMinutes || intervalMinutes <= 0) {
+                return;
+            }
+
+            refreshTimer = setInterval(() => {
+                loadAllNews({ silent: true });
+            }, intervalMinutes * 60000);
+        }
+
         /**
          * 加载所有新闻
          */
-        async function loadAllNews() {
+        async function loadAllNews(options = {}) {
             try {
-                showLoading();
+                if (!options.silent) {
+                    showLoading();
+                }
 
                 // 加载配置
                 const config = await loadFeedsConfig();
-                allFeeds = config.feeds;
+                allFeeds = config.feeds || [];
+                appSettings = {
+                    ...DEFAULT_SETTINGS,
+                    ...(config.settings || {})
+                };
+                renderCategoryFilters();
+                setupAutoRefresh();
+                allFeedMeta = {};
 
-                // 并行加载所有 RSS 源
-                const feedPromises = allFeeds.map(async feed => {
-                    const articles = await fetchRSSFeed(feed.rss);
+                await runWithConcurrency(allFeeds, appSettings.maxConcurrentRequests, async feed => {
+                    const articles = await fetchRSSFeed(feed);
                     allArticles[feed.name] = articles;
-                    await delay(100); // 防止请求过快
                 });
-
-                await Promise.all(feedPromises);
 
                 // 渲染
                 renderNewsGrid();
@@ -1183,6 +2049,8 @@
          */
         function init() {
             // 绑定事件
+            document.getElementById('hotCategoryFilters').addEventListener('click', handleHotCategoryFilter);
+            document.getElementById('hotRefreshBtn').addEventListener('click', handleHotRefresh);
             document.getElementById('categoryFilters').addEventListener('click', handleCategoryFilter);
             document.getElementById('refreshBtn').addEventListener('click', handleRefresh);
             document.getElementById('bookmarksToggle').addEventListener('click', handleBookmarksToggle);
@@ -1191,6 +2059,9 @@
             loadBookmarksConfig().then(config => {
                 renderBookmarks(config);
             });
+
+            // 加载实时热榜
+            loadHotTrends();
 
             // 加载新闻
             loadAllNews();

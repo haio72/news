@@ -52,6 +52,9 @@
   "settings": {
     "articlesPerFeed": 10,
     "refreshInterval": 30,
+    "staleThresholdMinutes": 180,
+    "requestTimeoutMs": 12000,
+    "maxConcurrentRequests": 4,
     "cacheDuration": 60,
     "showCategories": true,
     "enableDarkMode": true

@@ -1,0 +1,66 @@
+{
+  "settings": {
+    "refreshInterval": 5,
+    "itemsPerSource": 12,
+    "requestTimeoutMs": 10000,
+    "cacheTtlSeconds": 300
+  },
+  "sources": [
+    {
+      "name": "V2EX 热门",
+      "category": "中文社区",
+      "url": "https://www.v2ex.com/api/topics/hot.json",
+      "homepage": "https://www.v2ex.com/?tab=hot",
+      "type": "v2ex",
+      "enabled": true
+    },
+    {
+      "name": "Hacker News",
+      "category": "科技开发",
+      "url": "https://hacker-news.firebaseio.com/v0/topstories.json",
+      "homepage": "https://news.ycombinator.com/",
+      "type": "hackernews",
+      "enabled": true
+    },
+    {
+      "name": "GitHub Trending",
+      "category": "科技开发",
+      "url": "https://github.com/trending?since=daily",
+      "homepage": "https://github.com/trending",
+      "type": "githubTrending",
+      "enabled": true
+    },
+    {
+      "name": "微博热搜",
+      "category": "中文热榜",
+      "url": "https://s.weibo.com/top/summary",
+      "homepage": "https://s.weibo.com/top/summary",
+      "type": "restricted",
+      "enabled": true
+    },
+    {
+      "name": "知乎热榜",
+      "category": "中文热榜",
+      "url": "https://www.zhihu.com/hot",
+      "homepage": "https://www.zhihu.com/hot",
+      "type": "restricted",
+      "enabled": true
+    },
+    {
+      "name": "百度热搜",
+      "category": "中文热榜",
+      "url": "https://top.baidu.com/board?tab=realtime",
+      "homepage": "https://top.baidu.com/board?tab=realtime",
+      "type": "restricted",
+      "enabled": true
+    },
+    {
+      "name": "B站热门",
+      "category": "中文热榜",
+      "url": "https://www.bilibili.com/v/popular/all",
+      "homepage": "https://www.bilibili.com/v/popular/all",
+      "type": "restricted",
+      "enabled": true
+    }
+  ]
+}

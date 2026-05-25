@@ -1,0 +1,6 @@
+name = "newspulse-hot-api"
+main = "worker.js"
+compatibility_date = "2026-05-24"
+
+[vars]
+HOT_SETTINGS = '{"itemsPerSource":12,"requestTimeoutMs":10000,"cacheTtlSeconds":300}'
