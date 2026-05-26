@@ -6,7 +6,7 @@
 
 - 🔧 **零依赖配置** - 只需编辑 `feeds.json` 和 `bookmarks.json` 即可管理内容
 - 🌐 **纯静态部署** - 支持 GitHub Pages / Cloudflare Pages / Netlify
-- ⭐ **收藏网站** - 快速访问常用的网站和工具
+- ⭐ **收藏页面** - 通过 `/bookmarks` 快速访问常用的网站和工具
 - 🔥 **实时热榜** - 通过 Cloudflare Worker 聚合公开热榜源
 - 🎨 **优雅设计** - 编辑杂志风格，深色主题，3D 悬停效果
 - 🚀 **跨域解决** - 使用 RSS2JSON API 代理，无需后端
@@ -16,7 +16,6 @@
 - 🔁 **自动刷新** - 按配置定时重新检查 RSS 源
 - 🩺 **源健康状态** - 显示最新文章时间、检查时间、抓取通道和失败原因
 - 🧭 **多通道抓取** - 直连 RSS 失败后自动回退到 RSS2JSON / AllOrigins
-- 📂 **折叠功能** - 可收起收藏区域，节省空间
 
 ## 📁 项目结构
 
@@ -25,6 +24,7 @@ news-aggregator/
 ├── index.html          # 主页面（包含所有 CSS 和 JavaScript）
 ├── feeds.json          # 新闻源配置文件（你需要编辑这个）
 ├── hot-sources.json    # 热榜源配置文件
+├── bookmarks/          # 收藏页面，部署后访问 /bookmarks
 ├── worker.js           # Cloudflare Worker 热榜 API
 ├── wrangler.toml       # Worker 部署配置
 ├── bookmarks.json      # 收藏网站配置文件（你需要编辑这个）

@@ -185,6 +185,35 @@
             animation: pulse 2s infinite;
         }
 
+        .header-actions {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-sm);
+            margin-top: var(--space-md);
+            animation: fadeIn 0.8s ease-out 0.5s both;
+        }
+
+        .header-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: 0.55rem 0.95rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all var(--transition-fast);
+        }
+
+        .header-link:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            box-shadow: var(--shadow-glow);
+        }
+
         /* ============================================
            CONTROLS
            ============================================ */
@@ -446,159 +475,6 @@
 
         .rss-section {
             margin-top: var(--space-xl);
-        }
-
-        /* ============================================
-           BOOKMARKS SECTION
-           ============================================ */
-        .bookmarks-section {
-            margin-bottom: var(--space-xl);
-            animation: fadeIn 0.8s ease-out 0.3s both;
-        }
-
-        .bookmarks-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--space-md);
-            padding-bottom: var(--space-sm);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .bookmarks-title {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-        }
-
-        .bookmarks-toggle {
-            font-family: var(--font-body);
-            font-size: 0.7rem;
-            padding: 0.4rem 0.8rem;
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            border-radius: 4px;
-        }
-
-        .bookmarks-toggle:hover {
-            border-color: var(--accent-primary);
-            color: var(--accent-primary);
-        }
-
-        .bookmarks-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: var(--space-md);
-        }
-
-        .bookmark-category {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all var(--transition-normal);
-        }
-
-        .bookmark-category:hover {
-            border-color: var(--accent-primary);
-            box-shadow: var(--shadow-md);
-        }
-
-        .bookmark-category-header {
-            padding: var(--space-sm) var(--space-md);
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: var(--space-xs);
-        }
-
-        .bookmark-category-icon {
-            font-size: 1.2rem;
-        }
-
-        .bookmark-category-name {
-            font-family: var(--font-display);
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .bookmark-list {
-            padding: var(--space-sm);
-            list-style: none;
-        }
-
-        .bookmark-item {
-            display: flex;
-            align-items: flex-start;
-            gap: var(--space-xs);
-            padding: var(--space-sm);
-            border-radius: 6px;
-            transition: background var(--transition-fast);
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .bookmark-item:hover {
-            background: var(--bg-card-hover);
-        }
-
-        .bookmark-icon {
-            font-size: 0.8rem;
-            opacity: 0.6;
-            margin-top: 0.2rem;
-        }
-
-        .bookmark-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .bookmark-name {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.2rem;
-            display: block;
-        }
-
-        .bookmark-item:hover .bookmark-name {
-            color: var(--accent-primary);
-        }
-
-        .bookmark-description {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .bookmarks-collapsed .bookmarks-grid {
-            display: none;
-        }
-
-        .bookmarks-collapsed .bookmarks-toggle::after {
-            content: ' (展开)';
-        }
-
-        .bookmarks-toggle::after {
-            content: ' (收起)';
-        }
-
-        .bookmarks-collapsed .bookmarks-toggle::after {
-            content: ' (展开)';
         }
 
         /* ============================================
@@ -1051,6 +927,9 @@
                 <div class="stat-item" id="articleCount">加载中...</div>
                 <div class="stat-item" id="lastUpdate">加载中...</div>
             </div>
+            <nav class="header-actions" aria-label="页面导航">
+                <a class="header-link" href="/bookmarks">收藏</a>
+            </nav>
         </header>
 
         <!-- 实时热榜区域 -->
@@ -1079,23 +958,6 @@
                 <div class="loading" style="grid-column: 1 / -1;">
                     <div class="loading-spinner"></div>
                     <p>正在加载实时热榜...</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 收藏网站区域 -->
-        <section class="bookmarks-section" id="bookmarksSection">
-            <div class="bookmarks-header">
-                <h2 class="bookmarks-title">
-                    <span>⭐</span>
-                    常用网站
-                </h2>
-                <button class="bookmarks-toggle" id="bookmarksToggle">收起</button>
-            </div>
-            <div class="bookmarks-grid" id="bookmarksGrid">
-                <div class="loading">
-                    <div class="loading-spinner"></div>
-                    <p>正在加载收藏...</p>
                 </div>
             </div>
         </section>
@@ -1142,6 +1004,7 @@
                 <p>© 2026 NewsPulse. 个人热榜与新闻聚合器</p>
                 <div class="footer-links">
                     <a href="https://github.com" class="footer-link" target="_blank">GitHub</a>
+                    <a href="/bookmarks" class="footer-link">收藏</a>
                     <a href="#" class="footer-link" onclick="showConfigHelp(); return false;">配置帮助</a>
                 </div>
             </div>
@@ -1524,62 +1387,6 @@
         // ============================================
         // UI 渲染
         // ============================================
-        /**
-         * 加载收藏网站配置
-         */
-        async function loadBookmarksConfig() {
-            try {
-                const response = await fetch(withCacheBuster('bookmarks.json'), { cache: 'no-store' });
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const config = await response.json();
-                return config;
-            } catch (error) {
-                console.error('加载收藏配置失败:', error);
-                return null;
-            }
-        }
-
-        /**
-         * 渲染收藏网站
-         */
-        function renderBookmarks(config) {
-            const grid = document.getElementById('bookmarksGrid');
-
-            if (!config || !config.categories || config.categories.length === 0) {
-                grid.innerHTML = `
-                    <div class="error" style="grid-column: 1 / -1;">
-                        <p class="error-message">暂无收藏网站</p>
-                        <p class="error-details">请在 bookmarks.json 中添加你的收藏</p>
-                    </div>
-                `;
-                return;
-            }
-
-            grid.innerHTML = config.categories.map((category, catIndex) => `
-                <div class="bookmark-category" style="animation: fadeInUp 0.6s ease-out ${catIndex * 0.1}s both;">
-                    <div class="bookmark-category-header">
-                        <span class="bookmark-category-icon">${category.icon || '📁'}</span>
-                        <h3 class="bookmark-category-name">${category.name}</h3>
-                    </div>
-                    <ul class="bookmark-list">
-                        ${category.bookmarks.map((bookmark, index) => `
-                            <li>
-                                <a href="${bookmark.url}" target="_blank" rel="noopener noreferrer" class="bookmark-item" style="animation-delay: ${index * 0.05}s;">
-                                    <span class="bookmark-icon">🔗</span>
-                                    <div class="bookmark-content">
-                                        <span class="bookmark-name">${bookmark.name}</span>
-                                        <span class="bookmark-description">${bookmark.description || ''}</span>
-                                    </div>
-                                </a>
-                            </li>
-                        `).join('')}
-                    </ul>
-                </div>
-            `).join('');
-        }
-
         function renderCategoryFilters() {
             const filters = document.getElementById('categoryFilters');
             const categories = [...new Set(allFeeds.map(feed => feed.category).filter(Boolean))];
@@ -1858,21 +1665,6 @@
         // 事件处理
         // ============================================
         /**
-         * 收藏网站折叠/展开切换
-         */
-        function handleBookmarksToggle() {
-            const section = document.getElementById('bookmarksSection');
-            const toggle = document.getElementById('bookmarksToggle');
-            section.classList.toggle('bookmarks-collapsed');
-
-            if (section.classList.contains('bookmarks-collapsed')) {
-                toggle.textContent = '展开';
-            } else {
-                toggle.textContent = '收起';
-            }
-        }
-
-        /**
          * 分类筛选器点击事件
          */
         function handleCategoryFilter(event) {
@@ -2053,12 +1845,6 @@
             document.getElementById('hotRefreshBtn').addEventListener('click', handleHotRefresh);
             document.getElementById('categoryFilters').addEventListener('click', handleCategoryFilter);
             document.getElementById('refreshBtn').addEventListener('click', handleRefresh);
-            document.getElementById('bookmarksToggle').addEventListener('click', handleBookmarksToggle);
-
-            // 加载收藏网站
-            loadBookmarksConfig().then(config => {
-                renderBookmarks(config);
-            });
 
             // 加载实时热榜
             loadHotTrends();
